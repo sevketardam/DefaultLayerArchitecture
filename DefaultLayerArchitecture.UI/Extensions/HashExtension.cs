@@ -15,7 +15,7 @@ public static class HashExtension
 
     public static string ConvertHash(this string text)
     {
-        var salt = Encoding.ASCII.GetBytes(_configuration["Security:Salt"] ?? "");
+        var salt = Encoding.ASCII.GetBytes(_configuration?["Security:Salt"] ?? "");
 
         return Convert.ToBase64String(KeyDerivation.Pbkdf2(
             password: text!,
