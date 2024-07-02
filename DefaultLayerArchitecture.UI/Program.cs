@@ -35,6 +35,8 @@ builder.Services.AddAuthentication(options =>
     opt.ExpireTimeSpan = TimeSpan.FromDays(365);
 });
 
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddSession();
 builder.Services.AddResponseCompression(options => options.Providers.Add<GzipCompressionProvider>());
 builder.Services.AddResponseCaching();
