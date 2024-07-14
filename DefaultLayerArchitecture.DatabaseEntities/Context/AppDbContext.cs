@@ -24,6 +24,6 @@ public sealed class AppDbContext : DbContext
         base.OnModelCreating(modelBuilder);
     }
 
-    public DbSet<Users> Default { get; set; }
+    public DbSet<Users> Users { get; set; }
 
 }
