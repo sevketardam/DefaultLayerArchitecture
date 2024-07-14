@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DefaultLayerArchitecture.DatabaseEntitiesDal\DefaultLayerArchitecture.DatabaseEntitiesDal.csproj" />
     <ProjectReference Include="..\DefaultLayerArchitecture.DatabaseEntities\DefaultLayerArchitecture.DatabaseEntities.csproj" />
   </ItemGroup>
 

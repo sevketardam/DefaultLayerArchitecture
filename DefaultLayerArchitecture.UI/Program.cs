@@ -1,4 +1,5 @@
 using DefaultLayerArchitecture.DatabaseEntities.Context;
+using DefaultLayerArchitecture.UI.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
@@ -7,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+builder.Services.DbImplantation();
+
+builder.Services.HelperImplantation();
 
 
 builder.Services.AddDbContext<AppDbContext>(options =>
