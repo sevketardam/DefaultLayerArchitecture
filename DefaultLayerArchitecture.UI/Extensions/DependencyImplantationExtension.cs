@@ -1,5 +1,5 @@
-﻿using DefaultLayerArchitecture.DBEntitiesDAL.Concrete;
-using DefaultLayerArchitecture.DBEntitiesDAL.Interfaces;
+﻿using DefaultLayerArchitecture.DatabaseEntitiesDal.Concrete;
+using DefaultLayerArchitecture.DatabaseEntitiesDal.Interfaces;
 
 namespace DefaultLayerArchitecture.UI.Extensions;
 
@@ -7,7 +7,7 @@ public static class DependencyImplantationExtension
 {
     public static void DbImplantation(this IServiceCollection service)
     {
-        service.AddScoped<IDefaultDal, DefaultDal>();
+        service.AddScoped<IUsersDal, UsersDal>();
 
     }
 

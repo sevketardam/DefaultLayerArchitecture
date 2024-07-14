@@ -1,0 +1,121 @@
+﻿.datatable-box {
+    padding: 1rem;
+}
+
+
+/* Datatable css */
+.dataTables_wrapper {
+    width: 100%;
+    overflow: auto;
+    padding: 1rem;
+}
+
+    .dataTables_wrapper input, .dataTables_wrapper select {
+        outline: none !important;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        background: transparent;
+        color: #3c3c3c !important;
+        border: 1px solid #9f9f9f;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        background: #fbfbfb;
+        color: black !important;
+        border: 1px solid #d5d5d5;
+    }
+
+    .dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin: 7px 0;
+        gap: 5px;
+    }
+
+        .dataTables_wrapper .dataTables_filter input {
+            margin: 0 !important;
+        }
+/* Datatable css end */
+
+.custom-datatable tbody .button-box {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-datatable {
+    width: 100% !important;
+}
+
+    .custom-datatable thead {
+        border-bottom: 1px solid #e3e3e3;
+    }
+
+        .custom-datatable thead th {
+            text-transform: uppercase;
+            color: #494848;
+            outline: none !important;
+            padding: 1rem 10px !important;
+            cursor: pointer;
+        }
+
+    .custom-datatable tbody td {
+        padding: 1rem 10px !important;
+        color: #494848;
+        border: none !important;
+    }
+
+    .custom-datatable tbody tr {
+        box-shadow: -1px -1px 5px #0000000f;
+        background: whitesmoke !important;
+    }
+
+        .custom-datatable tbody tr:nth-child(even) {
+            background: white !important;
+        }
+
+.table-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.custom-select {
+    cursor: pointer !important;
+}
+
+.custom-input, .custom-select {
+    outline: none !important;
+    background: white !important;
+    border-color: #ffffff !important;
+    border-radius: 0.25rem !important;
+    box-shadow: 0 0 5px #00000014;
+    width: max-content;
+    min-width: 85px;
+    height: 35px;
+    border: 0.1px solid white;
+    border-color: #00000026 !important;
+    transition: .2s;
+    font-size: .95rem;
+}
+
+.custom-input {
+    padding: 10px !important;
+}
+
+    .custom-input:focus,
+    .custom-select:focus {
+        border-color: #696cff !important;
+    }
+
+    .custom-input:focus {
+        padding: 0 1rem !important;
+    }
+
+.custom-select option {
+    border: none !important;
+    height: 30px;
+}
