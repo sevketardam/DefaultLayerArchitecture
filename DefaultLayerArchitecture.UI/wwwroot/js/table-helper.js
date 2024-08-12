@@ -12,13 +12,13 @@
 
 let table;
 
-function CreateDataTable(element, addButton = {text:"",modalId:""}) {
-    let table = $(element).DataTable({
+function CreateDataTable(element, addButton = { text, modalId, id }, hasPaging = true, hasOrdering = true) {
+    return $(element).DataTable({
         language: {
-            //"url": "//cdn.datatables.net/plug-ins/1.13.2/i18n/tr.json",
             lengthMenu: "_MENU_",
             search: "",
             emptyTable: "Tabloda herhangi bir veri mevcut değil",
+            zeroRecords: "Tabloda herhangi bir veri bulunamadı",
             paginate: {
                 first: "İlk",
                 last: "Son",
@@ -26,34 +26,54 @@ function CreateDataTable(element, addButton = {text:"",modalId:""}) {
                 previous: "Önceki"
             },
         },
+        lengthMenu: [[50, 100, 200, 300, 500, -1], [50, 100, 200, 300, 500, "Hepsi"]],
+        order: [[0, "desc"]],
+        ordering: hasOrdering,
         bDestroy: true,
         autoWidth: false,
+        paging: hasPaging,
         info: false,
         initComplete: function (settings, json) {
             $('.dataTables_length select').addClass('form-select');
             if (addButton) {
-                $('.dataTables_filter input').closest(".dataTables_filter").append(`<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="${addButton.modalId}">${addButton.text}</button>`)
+                if (addButton.id) {
+                    $(element).closest(".dataTables_wrapper").find('.dataTables_filter input').closest(".dataTables_filter").append(`<button class="btn btn-success" id='${addButton.id}'>${addButton.text}</button>`)
+                } else if (addButton.modalId) {
+                    $(element).closest(".dataTables_wrapper").find('.dataTables_filter input').closest(".dataTables_filter").append(`<button class="btn btn-success" data-bs-toggle="modal" data-bs-target="${addButton.modalId}">${addButton.text}</button>`)
+                }
             }
             $('.dataTables_filter input').addClass('form-control');
             $('.dataTables_filter input').attr('placeholder', 'Ara');
 
         }
-    })
-
-    return table;
+    });
 }
 
 
-function removeDataTableRow(rowId) {
-    var rowIndex = getRowIndexByDataId(rowId)
-    table.row(rowIndex).remove().draw(false);
+function removeDataTableRow(rowId, anotherTable) {
+    var rowIndex = getRowIndexByDataId(rowId, anotherTable)
+    if (anotherTable) {
+        anotherTable.row(rowIndex).remove().draw(false);
+    } else {
+
+        table.row(rowIndex).remove().draw(false);
+    }
 }
 
-function addDataTableRow(data, dataId) {
-    var rowNode = table.row
-        .add(data)
-        .draw()
-        .node();
+function addDataTableRow(data, dataId, anotherTable) {
+    if (anotherTable) {
+        var rowNode = anotherTable.row
+            .add(data)
+            .draw()
+            .node();
+    } else {
+        var rowNode = table.row
+            .add(data)
+            .draw()
+            .node();
+    }
+
+    table.order([0, 'asc']).draw();
 
     $(rowNode).attr('data-id', dataId);
 
@@ -62,28 +82,52 @@ function addDataTableRow(data, dataId) {
 
 let globalDataId;
 
-function updateDataTableRow(data) {
+function updateDataTableRow(data, dataId, anotherTable) {
+    if (dataId) {
 
-    var rowIndex = getRowIndexByDataId(globalDataId)
+        var rowIndex = getRowIndexByDataId(dataId, anotherTable)
+    } else {
+        var rowIndex = getRowIndexByDataId(globalDataId, anotherTable)
+    }
 
-    var rowNode = table.row(rowIndex)
-        .data(data)
-        .draw()
-        .node();
 
+
+    if (anotherTable) {
+
+        var rowNode = anotherTable.row(rowIndex)
+            .data(data)
+            .draw()
+            .node();
+    } else {
+
+        var rowNode = table.row(rowIndex)
+            .data(data)
+            .draw()
+            .node();
+
+        table.draw()
+    }
     return rowNode;
 }
 
-function getRowIndexByDataId(dataId) {
+function getRowIndexByDataId(dataId, anotherTable) {
     var rowIndex = -1;
+    if (anotherTable) {
+        anotherTable.rows().every(function (index) {
+            if ($(this.node()).attr('data-id') == dataId) {
+                rowIndex = index;
+                return false;
+            }
+        });
+    } else {
+        table.rows().every(function (index) {
+            if ($(this.node()).attr('data-id') == dataId) {
+                rowIndex = index;
+                return false;
+            }
+        });
+    }
 
-    table.rows().every(function (index) {
-        var rowData = this.data();
-        if ($(this.node()).attr('data-id') == dataId) {
-            rowIndex = index;
-            return false;
-        }
-    });
 
     return rowIndex;
 }
