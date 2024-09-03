@@ -1,12 +1,62 @@
-﻿.datatable-box {
+﻿html {
+    font-size: 10px !important;
+}
+
+.select2-search--dropdown .select2-search__field {
+    outline: none;
+}
+
+.select2-container--default .select2-selection--single {
+    border: var(--bs-border-width) solid var(--bs-border-color) !important;
+}
+
+.select2-container--open .select2-dropdown--below {
+    border: var(--bs-border-width) solid var(--bs-border-color) !important;
+}
+
+.select2-container {
+    display: block !important;
+    width: 100% !important;
+}
+
+    .select2-container .select2-search--inline .select2-search__field {
+        height: 26px;
+    }
+
+.select2-container--default .select2-selection--multiple {
+    border: var(--bs-border-width) solid var(--bs-border-color) !important;
+}
+
+.table.dataTable.no-footer {
+    border: none;
+}
+
+.datatable-box {
     padding: 1rem;
 }
 
+.modal {
+    background: #00000029;
+    z-index: 1051;
+}
+
+.form-group label {
+    font-size: .8rem;
+}
 
 /* Datatable css */
+
+table.dataTable tbody tr.even td {
+    background: #e8e8e8;
+}
+
+table.dataTable tbody tr td {
+    align-content: center;
+}
+
 .dataTables_wrapper {
     width: 100%;
-    overflow: auto;
+    /*overflow: auto;*/
     padding: 1rem;
 }
 
@@ -59,14 +109,15 @@
             text-transform: uppercase;
             color: #494848;
             outline: none !important;
-            padding: 1rem 10px !important;
+            padding: 1rem 28px 10px 0px !important;
             cursor: pointer;
+            position: relative;
         }
 
-    .custom-datatable tbody td {
+    .custom-datatable tbody td, .custom-datatable tfoot td {
         padding: 1rem 10px !important;
         color: #494848;
-        border: none !important;
+        border: 1px solid #00000026;
     }
 
     .custom-datatable tbody tr {
@@ -118,4 +169,49 @@
 .custom-select option {
     border: none !important;
     height: 30px;
+}
+
+
+
+
+table.datatable thead .sorting:after,
+table.datatable thead .sorting_asc:after,
+table.datatable thead .sorting_desc:after,
+table.datatable thead .sorting_asc_disabled:after,
+table.datatable thead .sorting_desc_disabled:after {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    display: block;
+    font-family: boxicons !important;
+    font-weight: 400;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+    display: inline-block;
+    text-transform: none;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    font-size: 1.5rem;
+    opacity: 1;
+}
+
+table.datatable thead .not-sort {
+    display: none;
+}
+
+table.datatable thead .sorting:not(.not-sort):after {
+    content: "\eb8b" !important;
+    /* sort */
+}
+
+table.datatable thead .sorting_asc:not(.not-sort):after {
+    content: "\ed42" !important;
+    /* sort-by-attributes */
+}
+
+table.datatable thead .sorting_desc:not(.not-sort):after {
+    content: "\ed35" !important;
+    /* sort-by-attributes-alt */
 }

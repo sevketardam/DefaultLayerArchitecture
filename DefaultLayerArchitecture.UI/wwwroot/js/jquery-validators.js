@@ -54,3 +54,9 @@ function mod97(digital) {
     }
     return checksum;
 }
+
+$("input,select").on("input", function () {
+    if ($(this).hasClass("is-invalid")) {
+        $(this).removeClass("is-invalid")
+    }
+})

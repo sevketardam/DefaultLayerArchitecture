@@ -12,7 +12,7 @@
 
 let table;
 
-function CreateDataTable(element, addButton = { text, modalId, id }, hasPaging = true, hasOrdering = true) {
+function CreateDataTable(element, addButton = { text, modalId, id }, hasPaging = true, hasOrdering = true, colDefs) {
     return $(element).DataTable({
         language: {
             lengthMenu: "_MENU_",
@@ -25,7 +25,12 @@ function CreateDataTable(element, addButton = { text, modalId, id }, hasPaging =
                 next: "Sonraki",
                 previous: "Önceki"
             },
+            loadingRecords: '&nbsp;',
+            processing: '<div class="spinner"></div>'
         },
+        orderCellsTop: true,
+        processing: true,
+        columnDefs: colDefs,
         lengthMenu: [[50, 100, 200, 300, 500, -1], [50, 100, 200, 300, 500, "Hepsi"]],
         order: [[0, "desc"]],
         ordering: hasOrdering,
@@ -66,14 +71,15 @@ function addDataTableRow(data, dataId, anotherTable) {
             .add(data)
             .draw()
             .node();
+        anotherTable.order([0, 'desc']).draw();
     } else {
         var rowNode = table.row
             .add(data)
             .draw()
             .node();
+        table.order([0, 'desc']).draw();
     }
 
-    table.order([0, 'asc']).draw();
 
     $(rowNode).attr('data-id', dataId);
 
@@ -89,8 +95,6 @@ function updateDataTableRow(data, dataId, anotherTable) {
     } else {
         var rowIndex = getRowIndexByDataId(globalDataId, anotherTable)
     }
-
-
 
     if (anotherTable) {
 
@@ -131,3 +135,32 @@ function getRowIndexByDataId(dataId, anotherTable) {
 
     return rowIndex;
 }
+
+$(document).ready(function () {
+
+    $.fn.dataTable.ext.type.order['date-dd-mm-yyyy-pre'] = function (d) {
+        var parts = d.split('.');
+        return new Date(parts[2], parts[1] - 1, parts[0]);
+    };
+
+    $.fn.dataTable.ext.type.order['time-hh-mm-pre'] = function (d) {
+        var parts = d.split(':');
+        return parseInt(parts[0]) * 60 + parseInt(parts[1]); // Saatleri dakikaya çevirerek sıralama yapar
+    };
+
+    $.fn.dataTable.ext.type.order['currency-pre'] = function (data) {
+        // TL işaretini ve parantez içindeki negatif değerleri tanımlayan bir ifade
+        var expression = /((\(\₺))|(\₺\()/g;
+
+        // Doğru formatta olup olmadığını kontrol et
+        if (data.match(expression)) {
+            // Eşleşti - Parantezleri ve istemediğimiz karakterleri çıkar ve '-' işaretini başa ekle
+            data = '-' + data.replace(/[\₺\(\),.]/g, '');
+        } else {
+            data = data.replace(/[\₺\,.]/g, '');
+        }
+
+        // Sayısal değeri geri döndür
+        return parseInt(data, 10);
+    };
+})
