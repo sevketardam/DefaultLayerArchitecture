@@ -60,9 +60,9 @@ if (!app.Environment.IsDevelopment())
 app.UseStatusCodePages(async context =>
 {
     if (context.HttpContext.Response.StatusCode == 404 && (context.HttpContext.User.Identity?.IsAuthenticated ?? false))
-    {
         context.HttpContext.Response.Redirect("/not-found");
-    }
+    else
+        context.HttpContext.Response.Redirect("/login");
 });
 
 app.UseHttpsRedirection();
