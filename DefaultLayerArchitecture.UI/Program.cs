@@ -45,7 +45,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddSession();
 builder.Services.AddResponseCompression(options => options.Providers.Add<GzipCompressionProvider>());
-builder.Services.AddResponseCaching();
+//builder.Services.AddResponseCaching();
 
 var app = builder.Build();
 
