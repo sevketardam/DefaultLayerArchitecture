@@ -1,0 +1,26 @@
+﻿.password-input-box {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+    .password-input-box .show-password-btn {
+        position: absolute;
+        right: 10px;
+        top: 7px;
+        background: transparent;
+        cursor: pointer;
+    }
+
+    .password-input-box .generate-password {
+        color: black;
+        cursor: pointer;
+        font-size: .9rem;
+        text-decoration: underline;
+        width: max-content;
+    }
+
+
+    .password-input-box input {
+        padding-right: 2.5rem;
+    }
