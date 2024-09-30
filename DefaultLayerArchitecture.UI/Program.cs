@@ -17,7 +17,8 @@ builder.Services.HelperImplantation();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MSSQL"),
+            o => o.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
 });
 
 builder.Services.Configure<RequestLocalizationOptions>(options =>
