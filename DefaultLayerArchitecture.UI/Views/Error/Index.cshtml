@@ -1,55 +1,17 @@
 ﻿@{
-    Layout = null;
+    Layout = "_SimpleLayout";
+    ViewData["Title"] = "Sayfa Bulunamadı 404";
 }
 
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<div class="container">
 
-    <title>Sayfa Bulunamadı 404</title>
+    <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <h1>404</h1>
+        <h2>Aradığınız sayfa mevcut değil.</h2>
+        <a class="btn" href="/">Anasayfaya geri dön</a>
+        <img src="~/assets/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
+    </section>
 
-    <!-- Favicons -->
-    <link href="~/assets/img/favicon.png" rel="icon">
-    <link href="~/assets/img/logo.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-
-
-    <!-- Template Main CSS File -->
-    <link href="~/assets/css/style.css" rel="stylesheet">
-</head>
-
-<body>
-
-    <main>
-        <div class="container">
-
-            <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center">
-                <h1>404</h1>
-                <h2>Aradığınız sayfa mevcut değil.</h2>
-                <a class="btn" href="/">Anasayfaya geri dön</a>
-                <img src="~/assets/img/not-found.svg" class="img-fluid py-5" alt="Page Not Found">
-            </section>
-
-        </div>
-    </main>
-
-    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-    <!-- Vendor JS Files -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
-    <!-- Template Main JS File -->
-    <script src="~/assets/js/main.js"></script>
-
-</body>
-
-</html>
+</div>

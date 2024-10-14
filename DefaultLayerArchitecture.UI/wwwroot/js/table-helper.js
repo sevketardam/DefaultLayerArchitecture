@@ -145,22 +145,26 @@ $(document).ready(function () {
 
     $.fn.dataTable.ext.type.order['time-hh-mm-pre'] = function (d) {
         var parts = d.split(':');
-        return parseInt(parts[0]) * 60 + parseInt(parts[1]); // Saatleri dakikaya çevirerek sıralama yapar
+        return parseInt(parts[0]) * 60 + parseInt(parts[1]); 
     };
 
+$.fn.dataTable.ext.type.order['datetime-dd-mm-yyyy-hh-mm-pre'] = function (d) {
+    var datetimeParts = d.split(' ');
+    var dateParts = datetimeParts[0].split('.');
+    var timeParts = datetimeParts[1].split(':');
+    
+    return new Date(dateParts[2], dateParts[1] - 1, dateParts[0], timeParts[0], timeParts[1]);
+};
+
     $.fn.dataTable.ext.type.order['currency-pre'] = function (data) {
-        // TL işaretini ve parantez içindeki negatif değerleri tanımlayan bir ifade
         var expression = /((\(\₺))|(\₺\()/g;
 
-        // Doğru formatta olup olmadığını kontrol et
         if (data.match(expression)) {
-            // Eşleşti - Parantezleri ve istemediğimiz karakterleri çıkar ve '-' işaretini başa ekle
             data = '-' + data.replace(/[\₺\(\),.]/g, '');
         } else {
             data = data.replace(/[\₺\,.]/g, '');
         }
-
-        // Sayısal değeri geri döndür
+        
         return parseInt(data, 10);
     };
 })
