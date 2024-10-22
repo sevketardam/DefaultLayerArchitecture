@@ -202,3 +202,51 @@ $(".modal-tab-box .modal-tab-link").on("click", function () {
     $(thisModal).find(".tab-body").addClass("d-none")
     $(thisModal).find(".tab-body[tab-id='" + tabId + "']").removeClass("d-none")
 })
+
+
+$(document).ajaxError(function (event, jqXHR, settings, thrownError) {
+    if (settings.handleErrors && settings.handleErrors.indexOf(jqXHR.status) !== -1) {
+        return;
+    }
+    switch (jqXHR.status) {
+        case 403:
+            Swal.fire({
+                title: 'Hata',
+                html: "Yetkiniz yok",
+                icon: 'error',
+                confirmButtonText: 'Tamam'
+            }).then(() => {
+                location.reload();
+            })
+            break;
+        case 404:
+            Swal.fire({
+                title: 'Hata',
+                html: "İçerik bulunamadı",
+                icon: 'error',
+                confirmButtonText: 'Tamam'
+            }).then(() => {
+                location.reload();
+            })
+            break;
+        case 422:
+            Swal.fire({
+                title: 'Hata',
+                html: "Format Yanlış",
+                icon: 'error',
+                confirmButtonText: 'Tamam'
+            }).then(() => {
+                location.reload();
+            })
+            break;
+        default:
+            Swal.fire({
+                title: 'Hata',
+                html: "Bir şeyler ters gitti",
+                icon: 'error',
+                confirmButtonText: 'Tamam'
+            }).then(() => {
+                location.reload();
+            })
+    }
+});
