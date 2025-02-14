@@ -29,8 +29,6 @@ public sealed class AppDbContext : DbContext
                 UserName = "admin",
                 UserType = "admin",
                 CreatedDate = DateTime.Now,
-                DeletedDate = DateTime.Now,
-                UpdatedDate = DateTime.Now
             }
         );
 
