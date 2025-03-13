@@ -75,6 +75,8 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.Services.AddFirstUser();
+
 app.UseCookiePolicy(new CookiePolicyOptions()
 {
     MinimumSameSitePolicy = SameSiteMode.Lax

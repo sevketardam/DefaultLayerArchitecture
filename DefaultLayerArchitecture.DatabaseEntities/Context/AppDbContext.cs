@@ -21,17 +21,6 @@ public sealed class AppDbContext : DbContext
         //    .HasForeignKey(a => a.DefaultId)
         //    .OnDelete(DeleteBehavior.NoAction);
 
-        modelBuilder.Entity<Users>().HasData(
-            new Users()
-            {
-                Id = Guid.Parse("4f272788-5533-42d0-984e-0ca00046c011"),
-                Password = "",//
-                UserName = "admin",
-                UserType = "admin",
-                CreatedDate = DateTime.Now,
-            }
-        );
-
         base.OnModelCreating(modelBuilder);
     }
 
